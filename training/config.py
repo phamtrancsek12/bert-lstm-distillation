@@ -6,7 +6,7 @@ print("Devices: {}".format(DEVICE))
 
 DATA_PATH = "./data/"
 TRAIN_FILE = 'train.csv'
-TEST_FILE = 'test.csv'
+TEST_FILE = 'valid.csv'
 TEXT_FIELD_FILE = '{}/text_field.pkl'
 LABEL_FIELD_FILE = '{}/label_field.pkl'
 EMBEDDING_PATH = "./data/GoogleNews-vectors-negative300.bin"

@@ -1,5 +1,5 @@
 import torch
-from torchtext import data
+from torchtext.legacy import data
 from model.lstm import BiLSTM
 from train import distill
 from config import  EMBEDDING_PATH, DEVICE
@@ -14,9 +14,10 @@ def main():
 
     #  Load data
     text_field = data.Field(lower=True)
+    label_field_0 = data.Field(sequential=False, use_vocab=False, dtype=torch.long)
     label_field_1 = data.Field(sequential=False, use_vocab=False, dtype=torch.float)
     label_field_2 = data.Field(sequential=False, use_vocab=False, dtype=torch.float)
-    train_iter, test_iter = load_distill_data(text_field, label_field_1, label_field_2)
+    train_iter, test_iter = load_distill_data(text_field, label_field_0, label_field_1, label_field_2)
 
     vocab_size = len(text_field.vocab)
     model = BiLSTM(vocab_size)

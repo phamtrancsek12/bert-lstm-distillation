@@ -16,9 +16,9 @@ def evaluate(model, data):
     pred_res = []
     with torch.no_grad():
         for batch in tqdm(data):
-            sent, label = batch.text, batch.label_2
-            # label in label_field is (1, 2)
-            label.data.sub_(1)
+            # label_0 is real labels
+            sent, label = batch.text, batch.label_0
+
             truth_res += list(label.data)
             # Init
             model.batch_size = len(label.data)
@@ -28,8 +28,6 @@ def evaluate(model, data):
             pred = model(sent)
             pred_label = pred.data.max(1)[1].numpy()
             pred_res += [x for x in pred_label]
-
-            print(label.data)
 
     # Calculate performance
     truth_res = torch.tensor(truth_res)
